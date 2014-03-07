@@ -37,8 +37,9 @@ public class ExampleCommand implements CommandExecutor{
                 p.getInventory().addItem(new ItemStack(Material.BAKED_POTATO, 2)); //gebe dem Spieler 2 Baked Potato :D
                 p.setDisplayName("dummerPlayer"); //seinen DisplayName umändern
                 p.setLevel(1);//level setzen^^
-                return true;//--> Command ist hier zuende
+                
             }
+            return true;//--> Command ist hier zuende
         }
         
         return false;
