@@ -11,5 +11,7 @@ package de.dieflitzpiepen.minigameapi;
  * @author Tammo
  */
 public class MiniGameAPI {
-    
+    void cheese(){
+        System.out.println("cheeeseee");
+    }
 }
