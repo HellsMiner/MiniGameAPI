@@ -6,12 +6,19 @@
 
 package de.dieflitzpiepen.minigameapi;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 /**
  *
  * @author Tammo
  */
-public class MiniGameAPI {
-    void cheese(){
-        System.out.println("cheeeseee");
+public class MiniGameAPI extends JavaPlugin{
+    @Override
+    public void onEnable(){
+        System.out.println("[MiniGameAPI] wird aktiviert...");
+    }
+    @Override
+    public void onDisable(){
+        System.out.println("[MiniGameAPI] wird deaktiviert...");
     }
 }
