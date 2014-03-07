@@ -6,6 +6,7 @@
 
 package de.dieflitzpiepen.minigameapi.commands;
 
+import de.dieflitzpiepen.minigameapi.MiniGameAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -19,9 +20,14 @@ import org.bukkit.inventory.ItemStack;
  * @author Tammo
  */
 public class ExampleCommand implements CommandExecutor{
+    private MiniGameAPI plugin;
 
+    public ExampleCommand(MiniGameAPI plugin) {
+        this.plugin = plugin;
+    }
+  
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
         if(cmd.getName().equalsIgnoreCase("example")){
             sender.sendMessage("§cDas ist ein rotes Beispiel.");
             if(sender instanceof Player){
@@ -40,6 +46,17 @@ public class ExampleCommand implements CommandExecutor{
                 
             }
             return true;//--> Command ist hier zuende
+        }
+        if(cmd.getName().equalsIgnoreCase("test")){
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
+
+                @Override
+                public void run() {
+                    sender.sendMessage("10 Sekunden später...");//hier verwendete Variablen brauchen den modifier final s.o. (final CommandSender sender)
+                }
+                
+                    }, 10 * 20L /* = 10 * 20 Ticks. --> 20 Ticks = 1 Sekunde.*/);
+            return true;
         }
         
         return false;
