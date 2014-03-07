@@ -2,3 +2,10 @@ name: MiniGameAPI
 author: DieFlitzpiepen
 main: de.dieflitzpiepen.minigameapi.MiniGameAPI
 version: 0.1
+commands:
+  test:
+    description: test
+  example:
+    description: example
+    aliases: [ex, examp]
+    
