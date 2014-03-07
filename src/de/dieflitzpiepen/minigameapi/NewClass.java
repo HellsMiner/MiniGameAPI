@@ -12,4 +12,7 @@ package de.dieflitzpiepen.minigameapi;
  */
 public class NewClass {
     
+    void hi(){
+        System.out.println("test");
+    }
 }
