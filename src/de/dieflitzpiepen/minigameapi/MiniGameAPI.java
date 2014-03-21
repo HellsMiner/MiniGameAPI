@@ -27,6 +27,9 @@ public class MiniGameAPI extends JavaPlugin {
     File sqlFile = new File("plugins/MiniGameAPI", "MySQL.yml");
     FileConfiguration sql = YamlConfiguration.loadConfiguration(sqlFile);
 
+    File locFile = new File("plugins/MiniGameAPI", "Locations.yml");
+    public FileConfiguration locs = YamlConfiguration.loadConfiguration(locFile);
+    
     @Override
     public void onEnable() {
         System.out.println("[MiniGameAPI] wird aktiviert...");
