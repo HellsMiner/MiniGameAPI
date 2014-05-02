@@ -5,6 +5,7 @@
  */
 package de.dieflitzpiepen.minigameapi;
 
+import de.dieflitzpiepen.minigameapi.event.GameStartEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -102,6 +104,65 @@ public class GameUtils {
             p.setScoreboard(manager.getNewScoreboard());
             p.setScoreboard(mapvote);
         }
+    }
+
+    void setTime(int i) {
+        this.time = i;
+    }
+
+    int time;
+    int task;
+
+    @SuppressWarnings("deprecation")
+    public void countdownSecsLobby(final int secs, final String msg, final String[] bcast, final boolean countXP) {
+        setTime(secs);
+        task = Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
+
+            @Override
+            public void run() {
+
+                if (time == 1 || time == 2 || time == 3 || time == 4 || time == 5 || time == 10 || time == 15 || time == 20 || time == 30 || time == 45 || time == 60 || time == 90) {
+                    Bukkit.broadcastMessage(msg.replaceAll("%time%", time + ""));
+                    if (time >= 30) {
+                        for (String s : bcast) {
+                            Bukkit.broadcastMessage(s.replaceAll("%online%", players.size() + ""));
+                        }
+                    }
+                }
+                if (time == 20) {
+                    endVote();
+                }
+                if (countXP) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.setLevel(time);
+                    }
+                }
+                if (time == 0) {
+                    HandlerList hl = new HandlerList();
+                    GameStartEvent e = new GameStartEvent(hl);
+                    Bukkit.getPluginManager().callEvent(e);
+                    teleportAll();
+                    Bukkit.getScheduler().cancelTask(task);
+                }
+
+                time--;
+            }
+
+        }, 0L, 20L);
+
+    }
+
+    void endVote() {
+        this.voting = false;
+        int max = 0;
+        String currentmap = "1";
+        for (String map : vote.keySet()) {
+            if (vote.get(map) >= max) {
+                max = vote.get(map);
+                currentmap = map;
+            }
+        }
+        arena = Integer.valueOf(currentmap);
     }
 
     void teleportAll() {
