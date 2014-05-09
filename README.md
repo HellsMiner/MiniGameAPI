@@ -18,11 +18,11 @@ TODO (Tammo)
 -MOTD Status (0%)
 -MySQL Manager (80%)
 
-(Leo)
+TODO (Leo)
 -Spawns (30%)
 -Hub Command (0%)
 
-(Jonathan)
+TODO (Jonathan)
 -Votekick (70%)
 -Gruppen (0%)
 -Premiumjoin (0%)
